@@ -1,3 +1,9 @@
+*{
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
 body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -5,20 +11,86 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
+    padding: 0;
+    background-color: #222222;
+    position: relative;
+    overflow: hidden;
 }
+
+.circle1{
+    position: absolute;
+    width: 360px;
+    height: 360px;
+    top: -128px;
+    right: -128px;
+    border-radius: 50%;
+    background-color: #F1002B;
+    filter: blur(256px);
+    z-index: 0;
+}
+
+.circle2{
+    position: absolute;
+    width: 258px;
+    height: 258px;
+    bottom: -128px;
+    left: -128px;
+    border-radius: 50%;
+    background-color: #BE00ED;
+    filter: blur(256px);
+    z-index: 0;
+}
+
+
 
 .container {
     text-align: center;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80%;
+    z-index: 1;
+    overflow: hidden; /* Обрезаем видимость градиентных бордеров за пределами контейнера */
+    backdrop-filter: blur(46px);
+    border-top: 3px solid;
+    border-color: #28FF58;
+    box-shadow: 0px 0px 70px #28FF5830 ;
+    border-radius: 50px 50px 0px 0px;
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.1), rgba(88, 88, 88, 0.1), rgba(140, 140, 140, 0.1), rgba(255, 255, 255, 0.1));
 }
 
-button {
-    padding: 10px 20px;
-    font-size: 16px;
+h1 {
+    font-size: 2em;
+    margin: 0 0 20px;
+}
+
+.click-button {
+    width: 375px;
     cursor: pointer;
-    margin-top: 20px;
+    transition: all .15s;
+    position: absolute;
+    bottom: 0;
+}
+
+.click-button:hover{
+    scale: 0.985;
+}
+
+.container .count{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 38px;
+    color: #FFFFFF;
+    position: relative;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.count img{
+    width: 16px;
 }
