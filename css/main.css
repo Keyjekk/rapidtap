@@ -66,7 +66,82 @@ body {
     z-index: 0;
 }
 
+.header{
+    display: flex;
+    padding: 14px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    flex-direction: row;
+    gap: 8px;
+    height: 50px;
+}
 
+.header .profile-image img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 2px solid #FFB800;
+}
+
+.header .info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 50px;
+}
+
+.header .info .league{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.header .info .league p{
+    color: #FFFFFF90;
+    font-family: "Manrope-Regular";
+    font-size: 12px;
+    line-height: 12px;
+}
+
+.header .info .league .league-name{
+    color: #FFB800;
+    font-family: "Manrope-ExtraBold";
+    font-size: 18px;
+    line-height: 18px;
+}
+
+.header .info .progress-bar{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.header .info .progress-bar .bar{
+    position: relative;
+    border-radius: 16px;
+    width: 150px;
+    height: 5px;
+    background-color: #D9D9D950;
+}
+
+.header .info .progress-bar .current-bar{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: 16px;
+    width: 21px;
+    height: 5px;
+    background-color: #D9D9D9;
+}
+
+.header .info .progress-bar .limit{
+    font-family: "Manrope-Bold";
+    color: #D9D9D990;
+    font-size: 14px;
+    line-height: 14px;
+}
 
 .container {
     text-align: center;
@@ -86,6 +161,7 @@ body {
     box-shadow: 0px 0px 70px #28FF5830 ;
     border-radius: 50px 50px 0px 0px;
     background: linear-gradient(45deg, rgba(0, 0, 0, 0.1), rgba(88, 88, 88, 0.1), rgba(140, 140, 140, 0.1), rgba(255, 255, 255, 0.1));
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 h1 {
@@ -122,6 +198,7 @@ h1 {
 .purple {
     background-color: #9E00FF;
 }
+
 
 
 .click-button:active {

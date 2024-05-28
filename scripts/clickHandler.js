@@ -1,79 +1,39 @@
 // Получаем элементы DOM
-var clickCountElement = document.getElementById('click-count');
 var clickButton = document.getElementById('click-button');
+var clickCountDisplay = document.getElementById('click-count');
+var container = document.querySelector('.container');
 
-// Устанавливаем начальное количество очков
-var clickCount = 1083892; // Начальное количество очков
+var clickCount = 0;
+var clickTimes = [];
+var checkInterval = 5000; // Интервал в миллисекундах для проверки частоты кликов
+var clickLimit = 5; // Лимит кликов для смены цвета
 
-// Обработчик клика на кнопке
-clickButton.addEventListener('click', function() {
-    // Увеличиваем количество очков на 1
-    clickCount++;
-    // Обновляем текст на странице
-    clickCountElement.textContent = clickCount.toLocaleString(); // Отображаем количество очков с разделителями
-});
-
-// Получаем элементы DOM
-var clickButton = document.getElementById('click-button');
-
-// Обработчик клика на кнопке
+/// Обработчик клика на кнопке
 clickButton.addEventListener('click', function(event) {
-    // Получаем координаты клика
-    var x = event.clientX;
-    var y = event.clientY;
+    // Обновляем количество кликов
+    clickCount++;
+    clickCountDisplay.textContent = clickCount;
 
-    // Создаем одну частицу
-    createParticle(x, y);
-});
+    // Добавляем текущее время в массив времени кликов
+    var currentTime = new Date().getTime();
+    clickTimes.push(currentTime);
 
-// Функция для создания одной частицы
-function createParticle(x, y) {
-    // Создаем элемент частицы
-    var particle = document.createElement('div');
-    particle.classList.add('particle');
-    
-    // Определяем случайный цвет частицы
-    if (Math.random() < 0.5) {
-        particle.classList.add('green');
+    // Удаляем клики старше checkInterval
+    clickTimes = clickTimes.filter(function(time) {
+        return currentTime - time < checkInterval;
+    });
+
+    // Проверяем частоту кликов
+    if (clickTimes.length > clickLimit) {
+        // Если кликов больше лимита, меняем цвет на фиолетовый
+        container.style.borderColor = '#BE00ED';
+        container.style.boxShadow = '0 0 64px #BE00ED30';
     } else {
-        particle.classList.add('purple');
+        // Иначе меняем цвет на зеленый
+        container.style.borderColor = '#28FF58';
+        container.style.boxShadow = '0 0 64px #28FF5830';
     }
 
-    // Устанавливаем начальные координаты частицы
-    particle.style.left = x + 'px';
-    particle.style.top = y + 'px';
-    
-    // Добавляем частицу на страницу
-    document.body.appendChild(particle);
-
-    // Рассчитываем случайное направление и скорость движения частицы
-    var angle = Math.random() * Math.PI * 2;
-    var speed = Math.random() * 6 + 3; // Увеличиваем скорость частицы
-    var vx = Math.cos(angle) * speed;
-    var vy = Math.sin(angle) * speed;
-
-    // Запускаем анимацию движения частицы
-    requestAnimationFrame(moveParticle.bind(null, particle, vx, vy));
-}
-
-// Функция для анимации движения частицы
-function moveParticle(particle, vx, vy) {
-    // Обновляем координаты частицы
-    var x = parseFloat(particle.style.left) + vx;
-    var y = parseFloat(particle.style.top) + vy;
-
-    // Устанавливаем новые координаты частицы
-    particle.style.left = x + 'px';
-    particle.style.top = y + 'px';
-
-    // Задержка для анимации
-    requestAnimationFrame(moveParticle.bind(null, particle, vx, vy));
-
-    // Постепенно затухаем и исчезаем частицу
-    particle.style.opacity = Math.max(parseFloat(particle.style.opacity) - 0.01, 0);
-
-    // Удаляем частицу после исчезновения
-    if (parseFloat(particle.style.opacity) <= 0) {
-        particle.parentNode.removeChild(particle);
-    }
-}
+    // Очищаем массив времени кликов
+    clickTimes = [];
+});

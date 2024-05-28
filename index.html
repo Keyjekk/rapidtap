@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>RapidTapClicker</title>
-
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
@@ -15,8 +14,24 @@
 
     <!-- ---------- -->
 
+    <div class="header">
+        <div class="profile-image">
+            <img src="resources/img/profile.jpg" alt="2">
+        </div>
+        <div class="info">
+            <div class="league">
+                <p>League</p>
+                <p class="league-name">GOLD</p>
+            </div>
+            <div class="progress-bar">
+                <div class="bar"><div class="current-bar"></div></div>
+                <p class="limit">10M</p>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
-        <p class="count"><span id="click-count">1 083 892</span><img src="resources/img/icon.svg" alt=""></p>
+        <p class="count"><span id="click-count">0</span><img src="resources/img/icon.svg" alt=""></p>
         <img class="click-button" id="click-button" src="resources/img/COIN.png" alt="1">
     </div>
     <script src="scripts/clickHandler.js"></script>
