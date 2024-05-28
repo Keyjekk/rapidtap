@@ -1,0 +1,2 @@
+# rapidtap
+RapidTapCoin
