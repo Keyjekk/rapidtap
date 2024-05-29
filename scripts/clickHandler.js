@@ -1,39 +1,188 @@
 // Получаем элементы DOM
 var clickButton = document.getElementById('click-button');
-var clickCountDisplay = document.getElementById('click-count');
-var container = document.querySelector('.container');
+var clickCountElement = document.getElementById('click-count');
 
+const AllProgressBar = 150; //150px bar
+
+var needToRecieve = 0;
+
+const SILVER_LIMIT = 2;
+const RUBY_LIMIT = 4;
+const EMERALD_LIMIT = 10;
+const GOLD_LIMIT = 20;
+const DIAMOND_LIMIT = 30;
+const PLATINUM_LIMIT = 40;
+
+const BRONZE_COLOR_FIRST = "#C04D1C";
+const BRONZE_COLOR_SECOND = "#FF964A";
+const BRONZE_BORDER_IMG = "#FF964A";
+const BRONZE_BORDER_CONTENT = "#C04D1C";
+const BRONZE_SHADOW = "#FF964A50";
+const BRONZE_NAME = "BRONZE";
+
+const SILVER_COLOR_FIRST = "#BDBDBD";
+const SILVER_COLOR_SECOND = "#FFFFFF";
+const SILVER_BORDER_IMG = "#BDBDBD";
+const SILVER_BORDER_CONTENT = "#FF964A";
+const SILVER_SHADOW = "#BDBDBD50";
+const SILVER_NAME = "SILVER";
+
+const RUBY_COLOR_FIRST = "#D10B3B";
+const RUBY_COLOR_SECOND = "#FF6A85";
+const RUBY_BORDER_IMG = "#D10B3B";
+const RUBY_BORDER_CONTENT = "#D10B3B";
+const RUBY_SHADOW = "#FF6A8560";
+const RUBY_NAME = "RUBY";
+
+const EMERALD_COLOR_FIRST = "#0BD113";
+const EMERALD_COLOR_SECOND = "#8fff84";
+const EMERALD_BORDER_IMG = "#0BD113";
+const EMERALD_BORDER_CONTENT = "#0BD113";
+const EMERALD_SHADOW = "#8fff8450";
+const EMERALD_NAME = "EMERALD";
+
+const GOLD_COLOR_FIRST = "#FFB800";
+const GOLD_COLOR_SECOND = "#FFC062";
+const GOLD_BORDER_IMG = "#FFB800";
+const GOLD_BORDER_CONTENT = "#FFB800";
+const GOLD_SHADOW = "#FFC06250";
+const GOLD_NAME = "GOLD";
+
+const DIAMOND_COLOR_FIRST = "#0B96D1";
+const DIAMOND_COLOR_SECOND = "#6AFFF6";
+const DIAMOND_BORDER_IMG = "#0B96D1";
+const DIAMOND_BORDER_CONTENT = "#0B96D1";
+const DIAMOND_SHADOW = "#6AFFF650";
+const DIAMOND_NAME = "DIAMOND";
+
+const PLATINUM_COLOR_FIRST = "#470080";
+const PLATINUM_COLOR_SECOND = "#844AFF";
+const PLATINUM_BORDER_IMG = "#470080";
+const PLATINUM_BORDER_CONTENT = "#470080";
+const PLATINUM_SHADOW = "#844AFF50";
+const PLATINUM_NAME = "PLATINUM";
+
+var container = document.getElementById('container');
+var leagueName = document.getElementById('league-name');
+var leagueLimit = document.getElementById('limit');
+var profileImage = document.getElementById('profile-image');
+
+var currentBar = document.getElementById('current-bar');
+
+var currentLeague = SILVER_NAME;
 var clickCount = 0;
-var clickTimes = [];
-var checkInterval = 5000; // Интервал в миллисекундах для проверки частоты кликов
-var clickLimit = 5; // Лимит кликов для смены цвета
+var CountForClick = 1;
 
-/// Обработчик клика на кнопке
-clickButton.addEventListener('click', function(event) {
-    // Обновляем количество кликов
-    clickCount++;
-    clickCountDisplay.textContent = clickCount;
+document.addEventListener("DOMContentLoaded", function(){
 
-    // Добавляем текущее время в массив времени кликов
-    var currentTime = new Date().getTime();
-    clickTimes.push(currentTime);
+    currentLeague = BRONZE_NAME;
+    container.style.borderColor = BRONZE_BORDER_IMG;
+    container.style.boxShadow = "0px 0px 70px " + BRONZE_SHADOW;
+    leagueName.textContent = BRONZE_NAME;
+    leagueName.classList.add("bronze");
+    leagueLimit.textContent = SILVER_LIMIT;
+    profileImage.style.borderColor = BRONZE_BORDER_IMG;
 
-    // Удаляем клики старше checkInterval
-    clickTimes = clickTimes.filter(function(time) {
-        return currentTime - time < checkInterval;
-    });
+    needToRecieve = SILVER_LIMIT;
 
-    // Проверяем частоту кликов
-    if (clickTimes.length > clickLimit) {
-        // Если кликов больше лимита, меняем цвет на фиолетовый
-        container.style.borderColor = '#BE00ED';
-        container.style.boxShadow = '0 0 64px #BE00ED30';
-    } else {
-        // Иначе меняем цвет на зеленый
-        container.style.borderColor = '#28FF58';
-        container.style.boxShadow = '0 0 64px #28FF5830';
+  });
+
+function updateLeague(clickAmount) {
+    if (clickAmount >= SILVER_LIMIT && currentLeague == BRONZE_NAME) {
+        currentLeague = SILVER_NAME;
+        container.style.borderColor = SILVER_BORDER_IMG;
+        container.style.boxShadow = "0px 0px 70px " + SILVER_SHADOW;
+        leagueName.textContent = SILVER_NAME;
+        leagueName.classList.add("silver");
+        profileImage.style.borderColor = SILVER_BORDER_IMG;
+        leagueLimit.textContent = RUBY_LIMIT; 
+
+        needToRecieve = RUBY_LIMIT;
+        updateBar(clickAmount);
+    } else if (clickAmount >= RUBY_LIMIT && currentLeague == SILVER_NAME) {
+        currentLeague = RUBY_NAME;
+        container.style.borderColor = RUBY_BORDER_IMG;
+        container.style.boxShadow = "0px 0px 70px " + RUBY_SHADOW;
+        leagueName.textContent = RUBY_NAME;
+        leagueName.classList.add("ruby");
+        profileImage.style.borderColor = RUBY_BORDER_IMG;
+        leagueLimit.textContent = EMERALD_LIMIT; 
+
+        needToRecieve = EMERALD_LIMIT;
+        updateBar(clickAmount);
+    } else if (clickAmount >= EMERALD_LIMIT && currentLeague == RUBY_NAME) {
+        currentLeague = EMERALD_NAME;
+        container.style.borderColor = EMERALD_BORDER_IMG;
+        container.style.boxShadow = "0px 0px 70px " + EMERALD_SHADOW;
+        leagueName.textContent = EMERALD_NAME;
+        leagueName.classList.add("emerald");
+        profileImage.style.borderColor = EMERALD_BORDER_IMG;
+        leagueLimit.textContent = GOLD_LIMIT; 
+
+        needToRecieve = GOLD_LIMIT;
+        updateBar(clickAmount);
+    } else if (clickAmount >= GOLD_LIMIT && currentLeague == EMERALD_NAME) {
+        currentLeague = GOLD_NAME;
+        container.style.borderColor = GOLD_BORDER_IMG;
+        container.style.boxShadow = "0px 0px 70px " + GOLD_SHADOW;
+        leagueName.textContent = GOLD_NAME;
+        leagueName.classList.add("gold");
+        profileImage.style.borderColor = GOLD_BORDER_IMG;
+        leagueLimit.textContent = DIAMOND_LIMIT; 
+
+        needToRecieve = DIAMOND_LIMIT;
+        updateBar(clickAmount);
+    } else if (clickAmount >= DIAMOND_LIMIT && currentLeague == GOLD_NAME) {
+        currentLeague = DIAMOND_NAME;
+        container.style.borderColor = DIAMOND_BORDER_IMG;
+        container.style.boxShadow = "0px 0px 70px " + DIAMOND_SHADOW;
+        leagueName.textContent = DIAMOND_NAME;
+        leagueName.classList.add("diamond");
+        profileImage.style.borderColor = DIAMOND_BORDER_IMG;
+        leagueLimit.textContent = PLATINUM_LIMIT; 
+
+        needToRecieve = PLATINUM_LIMIT;
+        updateBar(clickAmount);
+    } else if (clickAmount >= PLATINUM_LIMIT && currentLeague == DIAMOND_NAME) {
+        currentLeague = PLATINUM_NAME;
+        container.style.borderColor = PLATINUM_BORDER_IMG;
+        container.style.boxShadow = "0px 0px 70px " + PLATINUM_SHADOW;
+        leagueName.textContent = PLATINUM_NAME;
+        leagueName.classList.add("platinum");
+        profileImage.style.borderColor = PLATINUM_BORDER_IMG;
+        leagueLimit.textContent = "infinity"; 
+
+        needToRecieve = 1000000000000000000000000000000000;
+        updateBar(clickAmount);
+    }
+}
+
+function updateBar(clickAmount){
+    var percentage = (clickAmount / needToRecieve) * 100;
+
+    var newWidth = (AllProgressBar * percentage) / 100;
+
+    if(newWidth > 150){
+        newWidth = 150;
     }
 
-    // Очищаем массив времени кликов
-    clickTimes = [];
+    currentBar.style.width = newWidth + "px";
+
+}
+
+// Обработчик клика на кнопке
+clickButton.addEventListener('click', function() {
+    // Увеличиваем количество кликов
+    clickCount = clickCount + CountForClick;
+
+    // Обновляем отображение количества кликов
+    clickCountElement.textContent = clickCount.toLocaleString();
+
+    // Обновляем лигу
+    updateLeague(clickCount);
+    updateBar(clickCount);
 });
+
+
+
+

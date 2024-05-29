@@ -78,18 +78,19 @@ body {
 }
 
 .header .profile-image img{
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     object-fit: cover;
+    border: 2px solid;
+    border-color: #FFFFFF;
     border-radius: 16px;
-    border: 2px solid #FFB800;
 }
 
 .header .info{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 50px;
+    height: 70px;
 }
 
 .header .info .league{
@@ -101,15 +102,56 @@ body {
 .header .info .league p{
     color: #FFFFFF90;
     font-family: "Manrope-Regular";
-    font-size: 12px;
-    line-height: 12px;
+    font-size: 14px;
+    line-height: 14px;
 }
 
 .header .info .league .league-name{
-    color: #FFB800;
     font-family: "Manrope-ExtraBold";
-    font-size: 18px;
-    line-height: 18px;
+    font-size: 26px;
+    line-height: 26px;
+}
+
+.bronze{
+    background: -webkit-linear-gradient(45deg, #C04D1C, #FF964A);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.silver{
+    background: -webkit-linear-gradient(45deg, #BDBDBD, #FFFFFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.ruby{
+    background: -webkit-linear-gradient(45deg, #D10B3B, #FF6A85);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.emerald{
+    background: -webkit-linear-gradient(45deg, #0BD113, #8fff84);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.gold{
+    background: -webkit-linear-gradient(45deg, #FFB800, #FFC062);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.diamond{
+    background: -webkit-linear-gradient(45deg, #0B96D1, #6AFFF6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.platinum{
+    background: -webkit-linear-gradient(45deg, #470080, #844AFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .header .info .progress-bar{
@@ -131,7 +173,7 @@ body {
     bottom: 0;
     left: 0;
     border-radius: 16px;
-    width: 21px;
+    width: 0;
     height: 5px;
     background-color: #D9D9D9;
 }
@@ -157,10 +199,13 @@ body {
     overflow: hidden; /* Обрезаем видимость градиентных бордеров за пределами контейнера */
     backdrop-filter: blur(46px);
     border-top: 3px solid;
-    border-color: #28FF58;
-    box-shadow: 0px 0px 70px #28FF5830 ;
-    border-radius: 50px 50px 0px 0px;
     background: linear-gradient(45deg, rgba(0, 0, 0, 0.1), rgba(88, 88, 88, 0.1), rgba(140, 140, 140, 0.1), rgba(255, 255, 255, 0.1));
+}
+
+.silver-border{
+    border-color: #BDBDBD;
+    box-shadow: 0px 0px 70px #BDBDBD50 ;
+    border-radius: 50px 50px 0px 0px;
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 

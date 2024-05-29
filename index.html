@@ -15,26 +15,28 @@
     <!-- ---------- -->
 
     <div class="header">
-        <div class="profile-image">
-            <img src="resources/img/profile.jpg" alt="2">
+        <div class="profile-image silver-img">
+            <img id="profile-image" src="resources/img/profile.jpg" alt="2">
         </div>
         <div class="info">
             <div class="league">
                 <p>League</p>
-                <p class="league-name">GOLD</p>
+                <p id="league-name" class="league-name bronze">SILVER</p>
             </div>
             <div class="progress-bar">
-                <div class="bar"><div class="current-bar"></div></div>
-                <p class="limit">10M</p>
+                <div id="bar" class="bar"><div id="current-bar" class="current-bar"></div></div>
+                <p id="limit" class="limit">?</p>
             </div>
         </div>
     </div>
 
-    <div class="container">
+    <div id="container" class="container silver-border">
         <p class="count"><span id="click-count">0</span><img src="resources/img/icon.svg" alt=""></p>
         <img class="click-button" id="click-button" src="resources/img/COIN.png" alt="1">
     </div>
+
     <script src="scripts/clickHandler.js"></script>
+    <script src="scripts/setLeague.js"></script>
     
 </body>
 </html>
