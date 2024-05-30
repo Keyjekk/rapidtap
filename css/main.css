@@ -124,6 +124,12 @@ body {
     -webkit-text-fill-color: transparent;
 }
 
+.gold{
+    background: -webkit-linear-gradient(45deg, #FFB800, #FFC062);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 .ruby{
     background: -webkit-linear-gradient(45deg, #D10B3B, #FF6A85);
     -webkit-background-clip: text;
@@ -132,12 +138,6 @@ body {
 
 .emerald{
     background: -webkit-linear-gradient(45deg, #0BD113, #8fff84);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.gold{
-    background: -webkit-linear-gradient(45deg, #FFB800, #FFC062);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -264,4 +264,60 @@ h1 {
 
 .count img{
     width: 16px;
+}
+
+
+.loading-block{
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    height: calc(100vh - 20px);
+    margin-top: 20px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Обрезаем видимость градиентных бордеров за пределами контейнера */
+    backdrop-filter: blur(64px);
+    border-top: 1px solid #DBDBDB;
+    border-radius: 50px 50px 0px 0px;
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.1), rgba(88, 88, 88, 0.1), rgba(140, 140, 140, 0.1), rgba(255, 255, 255, 0.1));
+    gap: 64px;
+    transition: all .2s;
+}
+
+.loading-block .text{
+    font-size: 23px;
+    color: #DBDBDB;
+    font-family: "Manrope-Bold";
+}
+
+.loading-block .roadmap{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 16px;
+}
+
+.loading-block .roadmap .list{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+}
+
+.loading-block .roadmap .list img{
+    width: 21px;
+    height: 21px;
+}
+
+.loading-block .roadmap .list .text{
+    font-family: "Manrope-Medium";
+    color: #FFFFFF;
+    font-size: 17px;
+}
+
+.slide-down {
+    transform: translateY(100%);
 }
