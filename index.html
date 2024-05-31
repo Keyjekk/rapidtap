@@ -11,6 +11,11 @@
         <p id="profile-name"></p>
     </div>
 
+    <div class="debug">
+        <h3>Debug Info</h3>
+        <pre id="debug-info"></pre>
+    </div>
+
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -22,11 +27,18 @@
                 // Получаем данные пользователя
                 const user = Telegram.WebApp.initDataUnsafe.user;
 
-                // Обновляем профильное фото и имя
+                // Элемент для отладки
+                const debugInfo = document.getElementById('debug-info');
+                
+                // Проверяем, получены ли данные пользователя
                 if (user) {
                     const profilePhoto = document.getElementById('profile-photo');
                     const profileName = document.getElementById('profile-name');
 
+                    // Отображаем отладочную информацию
+                    debugInfo.textContent = JSON.stringify(user, null, 2);
+
+                    // Проверяем наличие URL фотографии профиля
                     if (user.photo_url) {
                         profilePhoto.src = user.photo_url;
                     } else {
@@ -35,10 +47,10 @@
 
                     profileName.textContent = `${user.first_name} ${user.last_name || ''}`;
                 } else {
-                    console.error("User data is not available.");
+                    debugInfo.textContent = "User data is not available.";
                 }
             } else {
-                console.error("Telegram Web App API is not available.");
+                document.getElementById('debug-info').textContent = "Telegram Web App API is not available.";
             }
         });
     </script>
@@ -60,6 +72,19 @@
         #profile-name {
             margin-top: 10px;
             font-size: 20px;
+        }
+
+        .debug {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+
+        .debug pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
     </style>
 </body>
