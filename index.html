@@ -29,64 +29,21 @@
             if (window.Telegram && Telegram.WebApp) {
                 // Разворачиваем приложение на весь экран
                 Telegram.WebApp.expand();
+
+                // Получаем данные пользователя
+                const user = Telegram.WebApp.initDataUnsafe.user;
+
+                // Обновляем профильное фото и имя
+                if (user) {
+                    const profilePhoto = document.getElementById('profile-photo');
+                    //const profileName = document.getElementById('profile-name');
+
+                    profilePhoto.src = user.photo_url || 'default-avatar.png'; // Подставьте URL аватара пользователя или изображение по умолчанию
+                    //profileName.textContent = user.first_name + ' ' + (user.last_name || '');
+                }
             }
-
-            // Получаем элемент блока loading-block
-            var loadingBlock = document.querySelector('.loading-block');
-
-            // Задаем функцию для анимации ухода блока вниз
-            function animateBlockDown() {
-                // Добавляем класс для анимации
-                loadingBlock.classList.add('slide-down');
-
-                // Ждем 4 секунды перед тем как убрать блок
-                setTimeout(function() {
-                    // Скрываем блок
-                    loadingBlock.style.display = 'none';
-                }, 4000); // 4000 миллисекунд = 4 секунды
-            }
-
-            // Вызываем функцию анимации после загрузки страницы
-            animateBlockDown();
         });
     </script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Проверяем, что объект Telegram.WebApp существует
-        if (window.Telegram && Telegram.WebApp) {
-            // Разворачиваем приложение на весь экран
-            Telegram.WebApp.expand();
-
-            // Получаем данные пользователя
-            const user = Telegram.WebApp.initDataUnsafe.user;
-
-            // Обновляем профильное фото и имя
-            if (user) {
-                const profilePhoto = document.getElementById('profile-photo');
-                //const profileName = document.getElementById('profile-name');
-
-                profilePhoto.src = user.photo_url || 'default-avatar.png'; // Подставьте URL аватара пользователя или изображение по умолчанию
-                //profileName.textContent = user.first_name + ' ' + (user.last_name || '');
-            }
-        }
-    });
-</script>
-
-    <style>
-        .slide-down {
-            animation: slideDown 4s forwards;
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translateY(0);
-            }
-            to {
-                transform: translateY(100%);
-            }
-        }
-    </style>
 
     <!-- BACKGROUND 
 
