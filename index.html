@@ -51,6 +51,28 @@
         });
     </script>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Проверяем, что объект Telegram.WebApp существует
+        if (window.Telegram && Telegram.WebApp) {
+            // Разворачиваем приложение на весь экран
+            Telegram.WebApp.expand();
+
+            // Получаем данные пользователя
+            const user = Telegram.WebApp.initDataUnsafe.user;
+
+            // Обновляем профильное фото и имя
+            if (user) {
+                const profilePhoto = document.getElementById('profile-photo');
+                //const profileName = document.getElementById('profile-name');
+
+                profilePhoto.src = user.photo_url || 'default-avatar.png'; // Подставьте URL аватара пользователя или изображение по умолчанию
+                //profileName.textContent = user.first_name + ' ' + (user.last_name || '');
+            }
+        }
+    });
+</script>
+
     <style>
         .slide-down {
             animation: slideDown 4s forwards;
@@ -74,7 +96,7 @@
 
     <div class="header">
         <div class="profile-image silver-img">
-            <img id="profile-image" src="resources/img/profile.jpg" alt="2">
+            <img id="profile-photo" alt="2">
         </div>
         <div class="info">
             <div class="league">
